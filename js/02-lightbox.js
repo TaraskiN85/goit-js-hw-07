@@ -20,14 +20,9 @@ const createMarkup = () => {
   galleryUl.insertAdjacentHTML("beforeend", markup);
 };
 
-const openImage = (event) => {
-  event.preventDefault();
-
-  const lightbox = new SimpleLightbox(".gallery a", {
-    captionDelay: 250,
-    navText: ["←", "→"],
-  });
-};
-
 createMarkup();
-galleryUl.addEventListener("click", openImage);
+
+const lightbox = new SimpleLightbox(".gallery a", {
+  captionDelay: 250,
+  navText: ["←", "→"],
+});

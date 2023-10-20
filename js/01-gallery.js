@@ -18,17 +18,28 @@ const openImage = (event) => {
     console.log("Neeeh!");
     return;
   }
-  const instance = basicLightbox.create(`
-    <img src=${event.target.parentNode.href} width="800" height="600">
-  `);
 
-  instance.show();
-
-  document.addEventListener("keydown", (event) => {
+  const escapeModal = (event) => {
     if (event.key === "Escape") {
       instance.close();
     }
-  });
+  };
+
+  const instance = basicLightbox.create(
+    `
+    <img src=${event.target.parentNode.href} width="800" height="600">
+  `,
+    {
+      onShow: () => {
+        document.addEventListener("keydown", escapeModal);
+      },
+      onClose: () => {
+        document.removeEventListener("keydown", escapeModal);
+      },
+    }
+  );
+
+  instance.show();
 };
 
 createMarkup();
